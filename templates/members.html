@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Members {% endblock title %}
+
+
+{% block body %}
+
+<h1 style="text-align: center; padding-top: 20px; padding-bottom: 20px;">Edit Members</h1>
+<p style="text-align: center;">
+    <form method="POST" action="{% url 'add_member' %}" class="form-inline" style="align-items: center; padding-left: 600px;">
+        {%csrf_token%}
+        <input class="form-control mr-sm-2" name="name" type="search" placeholder="Add User" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add</button>
+    </form>
+</p>
+<br>
+<ul>
+    <div class="container">
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Name</th>
+                <th>Delete Member</th>
+              </tr>
+            </thead>
+            <tbody>
+            {%for member in members%}
+                <tr>
+                    <th>{{member.name}}</th>
+                    <th><a href="{% url 'delete_member' member.id %} ">Delete</a></th>
+                </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</ul>
+
+{% endblock body %}
